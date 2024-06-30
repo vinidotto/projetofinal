@@ -1,18 +1,21 @@
+import { check, validationResult } from "express-validator";
+import { Request, Response, NextFunction } from "express";
 
-import { Request, Response, NextFunction } from 'express';
-import * as yup from 'yup';
+const createAvaliadorValidator = [
+  check("nome").exists().withMessage("Nome is required"),
+  check("login").exists().withMessage("Login is required"),
+  check("senha").exists().withMessage("Senha is required"),
+  (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+  },
+];
 
-const avaliadorSchema = yup.object().shape({
-  nome: yup.string().required(),
-  login: yup.string().required(),
-  senha: yup.string().required().min(6),
-});
+const getAllAvaliadorValidator = (req: Request, res: Response, next: NextFunction) => {
+  next();
+};
 
-export default async function avaliadorValidator(req: Request, res: Response, next: NextFunction) {
-  try {
-    await avaliadorSchema.validate(req.body);
-    return next();
-  } catch (error) {
-    return res.status(400).json({ error: (error as Error).message });
-  }
-}
+export { createAvaliadorValidator, getAllAvaliadorValidator };

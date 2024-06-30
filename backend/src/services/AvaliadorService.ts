@@ -11,6 +11,11 @@ class AvaliadorService {
     return this.AvaliadorModel.create(AvaliadorData);
   }
 
+  async getAllAvaliadores(): Promise<Avaliador[]> {
+    const avaliadores = await this.AvaliadorModel.findAll();
+    return avaliadores as Avaliador[];
+  }
+
   async getAllAvaliadoresByUserId(user_id: number): Promise<Avaliador[]> {
     return this.AvaliadorModel.findAllByUserId(user_id);
   }

@@ -3,8 +3,10 @@ import EquipeController from "../controllers/EquipesController";
 
 const router = Router();
 
-router.post("/equipe/", EquipeController.createEquipe);
-router.get("/equipe/:equipe_id", EquipeController.getEquipesById);
+router.post("/", EquipeController.createEquipe);
+router.get("/", EquipeController.getEquipes);
+router.get("/:id", EquipeController.getEquipeById);
+router.put("/:id", EquipeController.updateEquipe);
 router.delete("/:id", EquipeController.deleteEquipe);
 
 export default router;
