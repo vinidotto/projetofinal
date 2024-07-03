@@ -5,22 +5,24 @@ interface Avaliador {
   nome: string;
   login: string;
   senha: string;
+  email: string;
+  firebaseID?: string;
 }
 
 class AvaliadorModel {
   async create(avaliador: Avaliador): Promise<Avaliador> {
-    const { nome, login, senha } = avaliador;
+    const { nome, login, senha, email, firebaseID } = avaliador;
 
     const result = await pool.query(
-      "INSERT INTO avaliadores (nome, login, senha) VALUES ($1, $2, $3) RETURNING *",
-      [nome, login, senha]
+      "INSERT INTO avaliadores (nome, login, senha, email, firebaseID) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      [nome, login, senha, email, firebaseID]
     );
-    console.log("deu pau aqui2");
 
     return result.rows[0];
   }
+
   async findAll(): Promise<Avaliador[] | null> {
-    const result = await pool.query("SELECT * FROM Avaliadores");
+    const result = await pool.query("SELECT * FROM avaliadores");
     return result.rows || null;
   }
 

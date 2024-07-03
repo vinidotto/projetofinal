@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+
 const HomePage = () => {
   const [totalEquipes, setTotalEquipes] = useState<number>(0);
   const [totalAvaliadores, setTotalAvaliadores] = useState<number>(0);
@@ -28,9 +29,9 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="max-w-screen-lg mx-auto p-6">
-      <h1 className="text-3xl font-bold text-center mb-8">Dashboard Inicial</h1>
-      <div className="flex justify-around gap-6">
+    <div className="mt-40 min-w-screen-lg mx-auto items-center" >
+      <h1 className="text-3xl font-bold text-center mb-8">Dashboard</h1>
+      <div className="flex gap-8 justify-center">
         <div className="bg-white text-black shadow-lg rounded-lg p-6 w-full max-w-sm text-center">
           <h2 className="text-xl font-semibold mb-4">Total de Equipes</h2>
           <p className="text-2xl font-bold">{totalEquipes}</p>

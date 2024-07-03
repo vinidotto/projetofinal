@@ -1,6 +1,7 @@
 CREATE DATABASE hackathon_db;
 
 
+
 CREATE TABLE avaliadores (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
@@ -19,3 +20,17 @@ CREATE TABLE avaliacoes (
     equipe_id INTEGER NOT NULL REFERENCES equipes(id),
     notas JSONB NOT NULL
 );
+
+ALTER TABLE avaliadores
+ADD COLUMN email VARCHAR(255);
+
+
+DELETE FROM avaliadores;
+
+
+
+select * from equipes;
+
+select * from avaliadores;
+
+select * from avaliacoes;
