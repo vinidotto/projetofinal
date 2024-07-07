@@ -99,7 +99,7 @@ const NewAvaliador = () => {
   };
 
   return (
-    <div className="mt-20 flex items-center justify-center bg-gray-100 p-4">
+    <div className="mt-10 flex justify-center bg-gray-100 p-4">
       <form className="bg-white text-black p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-center">Cadastrar Avaliador</h1>
         <div className="mb-4">

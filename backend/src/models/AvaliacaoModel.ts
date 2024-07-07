@@ -1,11 +1,16 @@
-
 import pool from "../database/dbConfig";
 
 interface Avaliacao {
   id?: number;
   avaliador_id: number;
   equipe_id: number;
-  notas: Record<string, any>;
+  notas: {
+    originalidade: number;
+    impacto: number;
+    execucao: number;
+    apresentacao: number;
+    viabilidade: number;
+  };
 }
 
 class AvaliacaoModel {
@@ -18,9 +23,28 @@ class AvaliacaoModel {
     return result.rows[0];
   }
 
-  async findAll(): Promise<Avaliacao[]> {
-    const result = await pool.query("SELECT * FROM avaliacoes");
-    return result.rows || [];
+  async findAll(filters: { avaliadorId?: number; equipeId?: number } = {}): Promise<Avaliacao[]> {
+    const { avaliadorId, equipeId } = filters;
+    let query = "SELECT * FROM avaliacoes WHERE 1=1";
+    const values: any[] = [];
+
+    if (avaliadorId !== undefined) {
+      query += " AND avaliador_id = $1";
+      values.push(avaliadorId);
+    }
+
+    if (equipeId !== undefined) {
+      query += ` AND equipe_id = $${values.length + 1}`;
+      values.push(equipeId);
+    }
+
+    try {
+      const result = await pool.query(query, values);
+      return result.rows || [];
+    } catch (error) {
+      console.error("Error finding Avaliacoes:", error);
+      throw error;
+    }
   }
 
   async findById(id: number): Promise<Avaliacao | null> {

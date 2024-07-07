@@ -11,8 +11,8 @@ class AvaliacaoService {
     return this.avaliacaoModel.create(avaliacaoData);
   }
 
-  async getAllAvaliacoes(): Promise<Avaliacao[]> {
-    return this.avaliacaoModel.findAll();
+  async getAllAvaliacoes(filters: { avaliadorId?: number; equipeId?: number }): Promise<Avaliacao[]> {
+    return this.avaliacaoModel.findAll(filters);
   }
 
   async getAvaliacaoById(id: number): Promise<Avaliacao | null> {

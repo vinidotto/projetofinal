@@ -1,11 +1,27 @@
 import { Request, Response } from 'express';
 import AvaliacaoService from '../services/AvaliacaoService';
-import { Avaliacao } from '../models/AvaliacaoModel';
+import {Avaliacao} from '../models/types';
+
 
 class AvaliacaoController {
   async createAvaliacao(req: Request, res: Response): Promise<void> {
     try {
-      const novaAvaliacao: Avaliacao = req.body;
+      const { avaliador_id, equipe_id, notas } = req.body;
+
+      const validatedNotas = {
+        originalidade: Number(notas.originalidade) || 0,
+        impacto: Number(notas.impacto) || 0,
+        execucao: Number(notas.execucao) || 0,
+        apresentacao: Number(notas.apresentacao) || 0,
+        viabilidade: Number(notas.viabilidade) || 0,
+      };
+
+      const novaAvaliacao = {
+        avaliador_id,
+        equipe_id,
+        notas: validatedNotas,
+      };
+
       const avaliacaoCriada = await AvaliacaoService.createAvaliacao(novaAvaliacao);
       res.status(201).json(avaliacaoCriada);
     } catch (error) {
@@ -16,7 +32,15 @@ class AvaliacaoController {
 
   async getAllAvaliacoes(req: Request, res: Response): Promise<void> {
     try {
-      const avaliacoes = await AvaliacaoService.getAllAvaliacoes();
+      const avaliadorId = parseInt(req.query.avaliadorId as string, 10);
+      const equipeId = parseInt(req.query.equipeId as string, 10);
+
+      const filters = {
+        ...(isNaN(avaliadorId) ? {} : { avaliadorId }),
+        ...(isNaN(equipeId) ? {} : { equipeId }),
+      };
+
+      const avaliacoes = await AvaliacaoService.getAllAvaliacoes(filters);
       res.json(avaliacoes);
     } catch (error) {
       console.error('Erro ao buscar avaliações:', error);
@@ -25,9 +49,9 @@ class AvaliacaoController {
   }
 
   async getAvaliacaoById(req: Request, res: Response): Promise<void> {
-    const id = parseInt(req.params.id);
-    if (!id) {
-      res.status(400).json({ error: 'ID da avaliação não fornecido' });
+    const id = parseInt(req.params.id, 10);
+    if (isNaN(id)) {
+      res.status(400).json({ error: 'ID da avaliação não fornecido ou inválido' });
       return;
     }
 
@@ -45,13 +69,23 @@ class AvaliacaoController {
   }
 
   async updateAvaliacao(req: Request, res: Response): Promise<void> {
-    const id = parseInt(req.params.id);
-    if (!id) {
-      res.status(400).json({ error: 'ID da avaliação não fornecido' });
+    const id = parseInt(req.params.id, 10);
+    if (isNaN(id)) {
+      res.status(400).json({ error: 'ID da avaliação não fornecido ou inválido' });
       return;
     }
 
     const atualizacaoAvaliacao: Partial<Avaliacao> = req.body;
+
+    if (atualizacaoAvaliacao.notas) {
+      atualizacaoAvaliacao.notas = {
+        originalidade: Number(atualizacaoAvaliacao.notas.originalidade) || 0,
+        impacto: Number(atualizacaoAvaliacao.notas.impacto) || 0,
+        execucao: Number(atualizacaoAvaliacao.notas.execucao) || 0,
+        apresentacao: Number(atualizacaoAvaliacao.notas.apresentacao) || 0,
+        viabilidade: Number(atualizacaoAvaliacao.notas.viabilidade) || 0,
+      };
+    }
 
     try {
       const avaliacaoAtualizada = await AvaliacaoService.updateAvaliacao(id, atualizacaoAvaliacao);
@@ -67,9 +101,9 @@ class AvaliacaoController {
   }
 
   async deleteAvaliacao(req: Request, res: Response): Promise<void> {
-    const id = parseInt(req.params.id);
-    if (!id) {
-      res.status(400).json({ error: 'ID da avaliação não fornecido' });
+    const id = parseInt(req.params.id, 10);
+    if (isNaN(id)) {
+      res.status(400).json({ error: 'ID da avaliação não fornecido ou inválido' });
       return;
     }
 

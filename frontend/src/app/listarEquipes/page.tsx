@@ -12,6 +12,23 @@ const ListaEquipes = () => {
   const [equipes, setEquipes] = useState<Equipe[]>([]);
   const [loading, setLoading] = useState(true);
 
+
+    useEffect(() => {
+    const fetchEquipes = async () => {
+      try {
+        const response = await fetch('/api/equipes');
+        if (!response.ok) {
+          throw new Error('Erro ao buscar equipes');
+        }
+        const data = await response.json();
+        setEquipes(data);
+      } catch (error) {
+        console.error('Erro ao buscar equipes:', error);
+      }
+    };
+
+    fetchEquipes();
+  }, []);
   useEffect(() => {
     const fetchEquipes = async () => {
       try {

@@ -29,6 +29,7 @@ const config: Config = {
       'customColor': '#0B7585',
       'colorBg': '#0fa7be',
       'red': '#FF0000',
+      'green': '#008000',
     },
   },
   plugins: [],

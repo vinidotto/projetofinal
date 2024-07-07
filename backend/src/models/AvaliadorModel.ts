@@ -22,7 +22,7 @@ class AvaliadorModel {
   }
 
   async findAll(): Promise<Avaliador[] | null> {
-    const result = await pool.query("SELECT * FROM avaliadores");
+    const result = await pool.query("SELECT id, nome FROM avaliadores");
     return result.rows || null;
   }
 

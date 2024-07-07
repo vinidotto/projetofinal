@@ -9,4 +9,5 @@ router.post("/", createAvaliadorValidator, AvaliadorController.createAvaliador);
 router.get("/:user_id", AvaliadorController.getAllAvaliadorByUserId);
 router.delete("/:id", AvaliadorController.deleteAvaliador);
 
+
 export default router;
