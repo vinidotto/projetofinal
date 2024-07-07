@@ -69,8 +69,8 @@ const ListarAvaliacoes = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="flex flex-col items-center mt-20">
-      <div className="mb-4">
+    <div className="flex flex-col items-center mt-10 px-4">
+      <div className="mb-4 w-full max-w-md">
         <label className="block text-sm font-semibold mb-2">Filtrar por Equipe</label>
         <select
           value={equipeId}
@@ -85,7 +85,7 @@ const ListarAvaliacoes = () => {
           ))}
         </select>
       </div>
-      <div className="mb-4">
+      <div className="mb-4 w-full max-w-md">
         <label className="block text-sm font-semibold mb-2">Filtrar por Avaliador</label>
         <select
           value={avaliadorId}
@@ -100,7 +100,7 @@ const ListarAvaliacoes = () => {
           ))}
         </select>
       </div>
-      <div className="w-full max-w-4xl">
+      <div className="w-full max-w-4xl overflow-x-auto mb-6">
         <h1 className="text-2xl font-bold mb-6 text-center">Listagem de Avaliações</h1>
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
@@ -114,16 +114,16 @@ const ListarAvaliacoes = () => {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Viabilidade</th>
             </tr>
           </thead>
-          <tbody className="bg-white text-black divide-y divide-gray-200">
+          <tbody className="bg-white text-black divide-y divide-gray-200 ">
             {avaliacoes.map((avaliacao) => (
               <tr key={avaliacao.id}>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{getEquipeNameById(avaliacao.equipe_id)}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{avaliacao.avaliador_id}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{avaliacao.notas?.originalidade}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{avaliacao.notas?.impacto }</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{avaliacao.notas?.execucao }</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{avaliacao.notas?.apresentacao }</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{avaliacao.notas?.viabilidade }</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{avaliacao.notas?.impacto}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{avaliacao.notas?.execucao}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{avaliacao.notas?.apresentacao}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{avaliacao.notas?.viabilidade}</td>
               </tr>
             ))}
           </tbody>

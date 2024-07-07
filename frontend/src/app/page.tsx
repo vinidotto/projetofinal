@@ -1,9 +1,7 @@
 "use client";
 
-
 import { useEffect, useState } from "react";
 import axios from "axios";
-
 
 const HomePage = () => {
   const [totalEquipes, setTotalEquipes] = useState<number>(0);
@@ -29,18 +27,18 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="mt-40 min-w-screen-lg mx-auto items-center" >
+    <div className="mt-10 mb-5 min-w-screen-lg mx-auto items-center px-4">
       <h1 className="text-3xl font-bold text-center mb-8">Dashboard</h1>
-      <div className="flex gap-8 justify-center">
-        <div className="bg-white text-black shadow-lg rounded-lg p-6 w-full max-w-sm text-center">
+      <div className="flex flex-wrap gap-8 justify-center">
+        <div className="bg-white text-black shadow-lg rounded-lg p-6 w-full sm:w-1/2 lg:w-1/3 text-center">
           <h2 className="text-xl font-semibold mb-4">Total de Equipes</h2>
           <p className="text-2xl font-bold">{totalEquipes}</p>
         </div>
-        <div className="bg-white text-black shadow-lg rounded-lg p-6 w-full max-w-sm text-center">
+        <div className="bg-white text-black shadow-lg rounded-lg p-6 w-full sm:w-1/2 lg:w-1/3 text-center">
           <h2 className="text-xl font-semibold mb-4">Total de Avaliadores</h2>
           <p className="text-2xl font-bold">{totalAvaliadores}</p>
         </div>
-        <div className="bg-white text-black shadow-lg rounded-lg p-6 w-full max-w-sm text-center">
+        <div className="bg-white text-black shadow-lg rounded-lg p-6 w-full sm:w-1/2 lg:w-1/3 text-center">
           <h2 className="text-xl font-semibold mb-4">Total de Avaliações</h2>
           <p className="text-2xl font-bold">{totalAvaliacoes}</p>
         </div>

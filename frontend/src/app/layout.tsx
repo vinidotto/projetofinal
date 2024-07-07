@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Roboto } from "next/font/google";
-import Header from "./header/page";
+import Header from "./components/header/page";
 import "./globals.css";
 
 const roboto = Roboto({ subsets: ["latin"], weight: "400" });

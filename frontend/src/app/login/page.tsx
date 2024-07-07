@@ -59,7 +59,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center mt-20">
+    <div className="flex items-center justify-center mt-20 px-4">
       <form className="bg-white text-black p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-center">Login Avaliador</h1>
         <div className="mb-4">
@@ -86,7 +86,7 @@ const Login = () => {
           />
           {errors.senha && <p className="text-red-500 text-sm mt-1">{errors.senha}</p>}
         </div>
-        <div className="flex gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
             type="button"
             onClick={handleLogin}
