@@ -48,12 +48,6 @@ const Header = () => {
     setTimeout(() => setShowEquipesMenu(false), 1200);
   }, []);
 
-  const handleLogin = () => {
-    localStorage.setItem('token', 'someToken'); 
-    checkLoginStatus(); 
-    router.push('/'); 
-  };
-
   const handleLogout = () => {
     localStorage.removeItem('token');
     setIsLoggedIn(false); 
@@ -124,8 +118,15 @@ const Header = () => {
                     Listar Equipes
                   </Link>
                 </div>
+                
               )}
             </div>
+            <Link
+              className="text-white hover:bg-gray-700 px-4 py-2 rounded transition-colors duration-300"
+              href="/listarAvaliacoes"
+            >
+              Listar Avaliações
+            </Link>
           </div>
           <button
             className="md:hidden text-white focus:outline-none"
@@ -135,6 +136,12 @@ const Header = () => {
           </button>
         </div>
         <div className="hidden md:flex gap-4 items-center">
+          <Link
+              className="text-white hover:bg-gray-700 px-4 py-2 rounded transition-colors duration-300"
+              href="/criarVinculo"
+            >
+              Vincular Avaliador
+            </Link>
           {isLoggedIn && (
             <Link
               className="text-white hover:bg-gray-700 px-4 py-2 rounded transition-colors duration-300"
@@ -154,7 +161,6 @@ const Header = () => {
             <Link
               className="text-white hover:text-gray-300 transition-colors duration-300 cursor-pointer"
               href="/login"
-              onClick={handleLogin}
             >
               Login
             </Link>
@@ -178,6 +184,13 @@ const Header = () => {
             Cadastrar Avaliador
           </Link>
           <Link
+              className="block px-4 py-2 hover:bg-gray-700"
+              href="/criarVinculo"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Vincular Avaliador
+            </Link>
+          <Link
             className="block px-4 py-2 hover:bg-gray-700"
             href="/listarAvaliadores"
             onClick={() => setIsMobileMenuOpen(false)}
@@ -198,6 +211,13 @@ const Header = () => {
           >
             Listar Equipes
           </Link>
+          <Link
+            className="block px-4 py-2 hover:bg-gray-700"
+            href="/listarAvaliacoes"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Listar Avaliações
+          </Link>
           {isLoggedIn && (
             <Link
               className="block px-4 py-2 hover:bg-gray-700"
@@ -206,6 +226,7 @@ const Header = () => {
             >
               Registrar Nota
             </Link>
+            
           )}
           {isLoggedIn ? (
             <button

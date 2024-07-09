@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Equipe, Avaliador } from "../../types"; 
+import { Equipe, Avaliador } from "../../types";
 
 const VincularAvaliadorEquipe = () => {
   const router = useRouter();
@@ -79,8 +79,8 @@ const VincularAvaliadorEquipe = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-customColor p-8 rounded-lg shadow-lg max-w-md w-full">
+    <div className="flex flex-col items-center mt-10 px-4">
+      <div className="bg-customColor p-6 rounded-lg shadow-lg max-w-screen-sm w-full max-h-screen overflow-auto">
         <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">Vincular Avaliador a Equipe</h1>
         <form>
           <div className="mb-4">

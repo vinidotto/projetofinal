@@ -6,24 +6,25 @@ interface EquipeAvaliador {
 }
 
 interface Equipe {
-    id?: number;
-    nome: string;
-  }
+  id?: number;
+  nome: string;
+}
 
 interface Avaliador {
-    id?: number;
-    nome: string;
-    login: string;
-    senha: string;
-    email: string;
-    firebaseID?: string;
+  id?: number;
+  nome: string;
+  login: string;
+  senha: string;
+  email: string;
+  firebaseID?: string;
 }
+
 class EquipeAvaliadorModel {
   async create(equipeAvaliador: EquipeAvaliador): Promise<EquipeAvaliador> {
     const { equipe_id, avaliador_id } = equipeAvaliador;
 
     const result = await pool.query(
-      "INSERT INTO EquipeAvaliador (equipe_id, avaliador_id) VALUES ($1, $2) RETURNING *",
+      "INSERT INTO equipe_avaliador (equipe_id, avaliador_id) VALUES ($1, $2) RETURNING *",
       [equipe_id, avaliador_id]
     );
 
@@ -32,7 +33,7 @@ class EquipeAvaliadorModel {
 
   async findByEquipeId(equipe_id: number): Promise<Avaliador[]> {
     const result = await pool.query(
-      "SELECT a.* FROM avaliadores a INNER JOIN EquipeAvaliador ea ON a.id = ea.avaliador_id WHERE ea.equipe_id = $1",
+      "SELECT a.* FROM avaliadores a INNER JOIN equipe_avaliador ea ON a.id = ea.avaliador_id WHERE ea.equipe_id = $1",
       [equipe_id]
     );
 
@@ -41,7 +42,7 @@ class EquipeAvaliadorModel {
 
   async findByAvaliadorId(avaliador_id: number): Promise<Equipe[]> {
     const result = await pool.query(
-      "SELECT e.* FROM Equipes e INNER JOIN EquipeAvaliador ea ON e.id = ea.equipe_id WHERE ea.avaliador_id = $1",
+      "SELECT e.* FROM equipes e INNER JOIN equipe_avaliador ea ON e.id = ea.equipe_id WHERE ea.avaliador_id = $1",
       [avaliador_id]
     );
 
@@ -50,7 +51,7 @@ class EquipeAvaliadorModel {
 
   async delete(equipe_id: number, avaliador_id: number): Promise<void> {
     await pool.query(
-      "DELETE FROM EquipeAvaliador WHERE equipe_id = $1 AND avaliador_id = $2",
+      "DELETE FROM equipe_avaliador WHERE equipe_id = $1 AND avaliador_id = $2",
       [equipe_id, avaliador_id]
     );
   }
