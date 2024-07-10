@@ -17,7 +17,7 @@ Você deverá ter instalado algumas ferramentas:
 **Passo #1** - Clone o repositório
 
 ```bash
-$ git clone https://github.com/vinidotto/ProjetoFinal.git
+$ git clone https://github.com/vinidotto/ProjetoFinal_CodeRace.git
 ```
 
 <br />
